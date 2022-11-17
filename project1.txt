@@ -1,0 +1,86 @@
+from sklearn.metrics import accuracy_score , classification_report , confusion_matrix
+import pickle
+import seaborn as sns
+
+
+df = pd.read_csv("IMDB Dataset.csv")
+df.head()
+
+df.shape()
+df.isnull().sum()
+df.describe()
+df.info()
+df['sentiment'].unique()
+df['sentiment'].value_counts()
+sns.countplot(df['sentiment'])
+
+label = LabelEncoder()
+df['sentiment'] = label.fit_transforms(df['sentiment'])
+
+x =df.['review']
+y =df.['sentiment']
+
+ps =PorterStemmer()
+corpus =[]
+ 
+  for i in range(len(x)):
+   print (i)
+   review =review.sub("[^a-zA-Z]"," ", x[i])
+   review =review.lower()
+   review =review.split()
+   review =[ps.stem(word) for words in reviews if word not in set(stopwords.words("english"))]
+   review =" ".join(review)
+   corpus.append(review)
+  
+from sklearn.feature_extraction.text import TfidVectorizer
+cv = TfidVectorizer(max_features=5000)
+x = cv.fit_transform(corpus).toarray()
+
+x.shape
+
+X_train , X_test.shape , Y_train.shape , Y_test.shape
+
+
+mnb =MultinomialNB()
+mnb.fit(X_train , Y_train)
+
+pred =mnb.predict(X_test)
+
+print(accuracy_score(Y_test , pred))
+print(confusion_matrix(Y_test ,pred))
+print(classification_report(Y_test , pred))
+
+pd.DataFrame(np.c[Y_test , pred] , columns=["Actual", "Predicted"]
+ 
+
+save_cv =pickle.load(open('count_Vectorizer.pk1','rb'))
+model =pickle.load(open('Movies_Review_Classification.pk1','rb'))
+
+def test_model(sentence):
+  sen =save_cv.transform([sentence]).toarray()
+res =model.predict(sen)[0]
+if res==1:
+    return 'Positive review'
+   else:
+     return 'Negative review'
+
+
+#TEST 1
+sen ='This is the wonderful movie of my life'
+res +tets_model(sen)
+print(res)
+
+
+#TEST 2
+sen ='This is the worst movie, I have ever seen in my life'
+res =test_model(sen)
+print(res)
+
+
+
+
+
+
+
+
+
